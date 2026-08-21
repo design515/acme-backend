@@ -17,10 +17,12 @@ src/
 ├── middleware/
 │   └── rateLimit.js
 ├── routes/
-│   └── orders.js
+│   ├── orders.js
+│   └── webhooks.js
 └── services/
     ├── orderService.js
-    └── paymentService.js
+    ├── paymentService.js
+    └── webhookService.js
 ```
 
 ## Getting started
@@ -28,15 +30,17 @@ src/
 ```bash
 npm install
 npm run dev
+npm test
 ```
 
 API base: http://localhost:3000
 
-| Method | Path          | Description              |
-| ------ | ------------- | ------------------------ |
-| GET    | `/health`     | Health check             |
-| GET    | `/api/orders` | List orders (rate limited) |
-| POST   | `/api/orders` | Create order (rate limited) |
+| Method | Path                    | Description                          |
+| ------ | ----------------------- | ------------------------------------ |
+| GET    | `/health`               | Health check                         |
+| GET    | `/api/orders`           | List orders (rate limited)           |
+| POST   | `/api/orders`           | Create order (rate limited)          |
+| POST   | `/api/webhooks/deliver` | Deliver webhook (deduped by eventId) |
 
 ## Pull requests
 
