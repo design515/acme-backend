@@ -52,6 +52,31 @@ curl -X POST http://localhost:3000/api/orders \
 }
 ```
 
+## Add order note
+
+`POST /api/orders/:orderId/notes`
+
+Attaches a short text note to an existing order.
+
+### Request example
+
+```bash
+curl -X POST http://localhost:3000/api/orders/ord_1/notes \
+  -H "Content-Type: application/json" \
+  -d '{ "text": "Ship before Friday" }'
+```
+
+### Success response (`201`)
+
+```json
+{
+  "id": "note_1",
+  "orderId": "ord_1",
+  "text": "Ship before Friday",
+  "createdAt": "2026-08-21T15:05:00.000Z"
+}
+```
+
 ## Health check
 
 `GET /health`

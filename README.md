@@ -37,12 +37,13 @@ API base: http://localhost:3000
 
 See [docs/api.md](docs/api.md) for request and response examples.
 
-| Method | Path                    | Description                          |
-| ------ | ----------------------- | ------------------------------------ |
-| GET    | `/health`               | Health check                         |
-| GET    | `/api/orders`           | List orders (rate limited)           |
-| POST   | `/api/orders`           | Create order (rate limited)          |
-| POST   | `/api/webhooks/deliver` | Deliver webhook (deduped by eventId) |
+| Method | Path                         | Description                          |
+| ------ | ---------------------------- | ------------------------------------ |
+| GET    | `/health`                    | Health check                         |
+| GET    | `/api/orders`                | List orders (rate limited)           |
+| POST   | `/api/orders`                | Create order (rate limited)          |
+| POST   | `/api/orders/:orderId/notes` | Add a short note to an order         |
+| POST   | `/api/webhooks/deliver`      | Deliver webhook (deduped by eventId) |
 
 ## Pull requests
 
