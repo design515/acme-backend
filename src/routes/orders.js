@@ -1,10 +1,30 @@
 import { Router } from "express";
 import { ordersRateLimit } from "../middleware/rateLimit.js";
-import { createOrder, listOrders } from "../services/orderService.js";
+import {
+  createOrder,
+  exportOrders,
+  listOrders,
+} from "../services/orderService.js";
 
 const router = Router();
 
 router.use(ordersRateLimit);
+
+router.get("/export", (req, res) => {
+  const format = req.query.format === "csv" ? "csv" : "json";
+  const result = exportOrders(format);
+
+  res.setHeader("Content-Type", result.contentType);
+  if (format === "csv") {
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="orders-export.csv"',
+    );
+    return res.send(result.body);
+  }
+
+  return res.json(result.body);
+});
 
 router.get("/", (_req, res) => {
   res.json({ orders: listOrders() });

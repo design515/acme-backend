@@ -32,11 +32,13 @@ npm run dev
 
 API base: http://localhost:3000
 
-| Method | Path          | Description              |
-| ------ | ------------- | ------------------------ |
-| GET    | `/health`     | Health check             |
-| GET    | `/api/orders` | List orders (rate limited) |
-| POST   | `/api/orders` | Create order (rate limited) |
+| Method | Path                          | Description                          |
+| ------ | ----------------------------- | ------------------------------------ |
+| GET    | `/health`                     | Health check                         |
+| GET    | `/api/orders`                 | List orders (rate limited)           |
+| POST   | `/api/orders`                 | Create order (rate limited)          |
+| GET    | `/api/orders/export`          | Export orders as JSON (mock)         |
+| GET    | `/api/orders/export?format=csv` | Export orders as CSV (mock)        |
 
 ## Pull requests
 
