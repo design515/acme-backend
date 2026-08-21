@@ -1,5 +1,6 @@
 import express from "express";
 import ordersRouter from "./routes/orders.js";
+import webhooksRouter from "./routes/webhooks.js";
 
 export function createApp() {
   const app = express();
@@ -9,6 +10,7 @@ export function createApp() {
     res.json({ status: "ok" });
   });
   app.use("/api/orders", ordersRouter);
+  app.use("/api/webhooks", webhooksRouter);
 
   return app;
 }
