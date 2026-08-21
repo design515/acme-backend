@@ -35,6 +35,8 @@ npm test
 
 API base: http://localhost:3000
 
+See [docs/api.md](docs/api.md) for request and response examples.
+
 | Method | Path                    | Description                          |
 | ------ | ----------------------- | ------------------------------------ |
 | GET    | `/health`               | Health check                         |
