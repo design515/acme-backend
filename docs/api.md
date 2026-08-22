@@ -2,6 +2,14 @@
 
 Base URL: `http://localhost:3000`
 
+Order endpoints require an active session token:
+
+```bash
+-H "Authorization: Bearer <session-token>"
+```
+
+Expired or missing tokens receive `401` with `{ "error": "Session expired" }` or `{ "error": "Unauthorized" }`.
+
 ## Create order
 
 `POST /api/orders`

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ordersRateLimit } from "../middleware/rateLimit.js";
+import { requireSession } from "../middleware/requireSession.js";
 import {
   addOrderNote,
   createOrder,
@@ -9,6 +10,7 @@ import {
 const router = Router();
 
 router.use(ordersRateLimit);
+router.use(requireSession);
 
 router.get("/", (_req, res) => {
   res.json({ orders: listOrders() });
