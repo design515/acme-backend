@@ -6,6 +6,7 @@ import {
   createOrder,
   listOrders,
 } from "../services/orderService.js";
+import { getOrderActivityHistory } from "../services/activityHistoryService.js";
 
 const router = Router();
 
@@ -29,6 +30,16 @@ router.post("/:orderId/notes", (req, res) => {
   try {
     const note = addOrderNote(req.params.orderId, req.body?.text ?? req.body?.note);
     res.status(201).json(note);
+  } catch (error) {
+    const status = error.message.startsWith("Order not found") ? 404 : 400;
+    res.status(status).json({ error: error.message });
+  }
+});
+
+router.get("/:orderId/activity", (req, res) => {
+  try {
+    const activity = getOrderActivityHistory(req.params.orderId);
+    res.json({ orderId: req.params.orderId, activity });
   } catch (error) {
     const status = error.message.startsWith("Order not found") ? 404 : 400;
     res.status(status).json({ error: error.message });
