@@ -15,13 +15,15 @@ src/
 ├── app.js
 ├── index.js
 ├── middleware/
-│   └── rateLimit.js
+│   ├── rateLimit.js
+│   └── requireSession.js
 ├── routes/
 │   ├── orders.js
 │   └── webhooks.js
 └── services/
     ├── orderService.js
     ├── paymentService.js
+    ├── sessionService.js
     └── webhookService.js
 ```
 
@@ -40,8 +42,8 @@ See [docs/api.md](docs/api.md) for request and response examples.
 | Method | Path                         | Description                          |
 | ------ | ---------------------------- | ------------------------------------ |
 | GET    | `/health`                    | Health check                         |
-| GET    | `/api/orders`                | List orders (rate limited)           |
-| POST   | `/api/orders`                | Create order (rate limited)          |
+| GET    | `/api/orders`                | List orders (session required)       |
+| POST   | `/api/orders`                | Create order (session required)      |
 | POST   | `/api/orders/:orderId/notes` | Add a short note to an order         |
 | POST   | `/api/webhooks/deliver`      | Deliver webhook (deduped by eventId) |
 
