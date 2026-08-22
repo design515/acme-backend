@@ -15,10 +15,14 @@ export function createOrder({ items = [], payment } = {}) {
   };
 
   orders.push(order);
+  console.log(
+    `[orders] created order id=${order.id} items=${order.items.length} total=${order.total}`,
+  );
   return order;
 }
 
 export function listOrders() {
+  console.log(`[orders] retrieved ${orders.length} order(s)`);
   return orders;
 }
 
