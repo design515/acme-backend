@@ -45,7 +45,7 @@ See [docs/api.md](docs/api.md) for request and response examples.
 | GET    | `/api/orders`                | List orders (session required)       |
 | POST   | `/api/orders`                | Create order (session required)      |
 | POST   | `/api/orders/:orderId/notes` | Add a short note to an order         |
-| POST   | `/api/webhooks/deliver`      | Deliver webhook once (retries only after failure) |
+\
 
 ## Pull requests
 

@@ -4,6 +4,7 @@ import { requireSession } from "../middleware/requireSession.js";
 import {
   addOrderNote,
   createOrder,
+  getOrderStatusHistory,
   listOrders,
 } from "../services/orderService.js";
 import { getOrderActivityHistory } from "../services/activityHistoryService.js";
@@ -40,6 +41,16 @@ router.get("/:orderId/activity", (req, res) => {
   try {
     const activity = getOrderActivityHistory(req.params.orderId);
     res.json({ orderId: req.params.orderId, activity });
+  } catch (error) {
+    const status = error.message.startsWith("Order not found") ? 404 : 400;
+    res.status(status).json({ error: error.message });
+  }
+});
+
+router.get("/:orderId/status-history", (req, res) => {
+  try {
+    const statusHistory = getOrderStatusHistory(req.params.orderId);
+    res.json({ orderId: req.params.orderId, statusHistory });
   } catch (error) {
     const status = error.message.startsWith("Order not found") ? 404 : 400;
     res.status(status).json({ error: error.message });
