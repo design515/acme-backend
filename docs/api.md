@@ -85,6 +85,41 @@ curl -X POST http://localhost:3000/api/orders/ord_1/notes \
 }
 ```
 
+## Order status history
+
+`GET /api/orders/:orderId/status-history`
+
+Returns status transitions for an order in chronological order. Requires an active session.
+
+### Success response (`200`)
+
+```json
+{
+  "orderId": "ord_1",
+  "statusHistory": [
+    {
+      "id": "status_1",
+      "orderId": "ord_1",
+      "from": null,
+      "to": "pending",
+      "changedAt": "2026-08-21T15:00:00.000Z"
+    },
+    {
+      "id": "status_2",
+      "orderId": "ord_1",
+      "from": "pending",
+      "to": "processing",
+      "changedAt": "2026-08-21T15:10:00.000Z"
+    }
+  ]
+}
+```
+
+### Error responses
+
+- `404` — `{ "error": "Order not found: ord_missing" }`
+- `400` — `{ "error": "orderId is required" }`
+
 ## Health check
 
 `GET /health`
