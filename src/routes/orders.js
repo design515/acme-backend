@@ -8,6 +8,7 @@ import {
   listOrders,
 } from "../services/orderService.js";
 import { getOrderActivityHistory } from "../services/activityHistoryService.js";
+import { getOrderDeliveryEstimate } from "../services/deliveryEstimateService.js";
 
 const router = Router();
 
@@ -51,6 +52,16 @@ router.get("/:orderId/status-history", (req, res) => {
   try {
     const statusHistory = getOrderStatusHistory(req.params.orderId);
     res.json({ orderId: req.params.orderId, statusHistory });
+  } catch (error) {
+    const status = error.message.startsWith("Order not found") ? 404 : 400;
+    res.status(status).json({ error: error.message });
+  }
+});
+
+router.get("/:orderId/delivery-estimate", (req, res) => {
+  try {
+    const estimate = getOrderDeliveryEstimate(req.params.orderId);
+    res.json(estimate);
   } catch (error) {
     const status = error.message.startsWith("Order not found") ? 404 : 400;
     res.status(status).json({ error: error.message });
