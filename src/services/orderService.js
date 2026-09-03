@@ -1,4 +1,5 @@
 import { chargePayment } from "./paymentService.js";
+import { toOrderDateIso } from "./orderDate.js";
 
 const orders = [];
 
@@ -36,9 +37,11 @@ function appendStatusChange(order, nextStatus, changedAt = new Date().toISOStrin
   return entry;
 }
 
-export function createOrder({ items = [], payment } = {}) {
+export function createOrder({ items = [], payment, createdAt: createdAtInput } = {}) {
   const charge = chargePayment(payment);
-  const createdAt = new Date().toISOString();
+  const createdAt = createdAtInput
+    ? toOrderDateIso(createdAtInput, "createdAt")
+    : new Date().toISOString();
 
   const order = {
     id: `ord_${orders.length + 1}`,
