@@ -1,18 +1,15 @@
 import { chargePayment } from "./paymentService.js";
-import {
-  ORDER_STATUSES,
-  appendStatusChange,
-  assertValidOrderId,
-  assertValidStatus,
-} from "./orderHelpers.js";
+
 
 const orders = [];
 
 export { ORDER_STATUSES };
 
-export function createOrder({ items = [], payment } = {}) {
+export function createOrder({ items = [], payment, createdAt: createdAtInput } = {}) {
   const charge = chargePayment(payment);
-  const createdAt = new Date().toISOString();
+  const createdAt = createdAtInput
+    ? toOrderDateIso(createdAtInput, "createdAt")
+    : new Date().toISOString();
 
   const order = {
     id: `ord_${orders.length + 1}`,
